@@ -1,10 +1,16 @@
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
+import "./NavBar.css";
 export default function NavBar() {
   return (
-    <nav>
-      <Link to="/invoices">Invoices</Link> |{" "}
-      <Link to="/expenses">Expenses</Link>
-    </nav>
+    <header>
+      <nav>
+        <NavLink className="nav-item" to="/">
+          Home
+        </NavLink>
+        <NavLink className="nav-item" to="/movies">
+          Movies
+        </NavLink>
+      </nav>
+    </header>
   );
 }

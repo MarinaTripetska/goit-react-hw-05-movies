@@ -14,8 +14,10 @@ The project was deployed on Netlify
 ### Used technologies:
 
 - React-app
+-
 - checking prop-types
 - React Router v6
 - Slugify for links path
 - React-toastify
 - packages: ClassNames, shortid, styled-components
+- Axios
