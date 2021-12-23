@@ -6,9 +6,7 @@ import SearchForm from "../SearchForm";
 import MovieList from "../MovieList";
 import Pagination from "../Pagination";
 import MainLoader from "../Loaders/MainLoader";
-import Section from "../StyledComponents/Section";
-import MainContainer from "../StyledComponents/MainContainer";
-import Title from "../Title";
+import { MainContainer, Section, Title } from "../UtilsStyledComponents";
 
 export default function SearchMovies() {
   const queryClient = useQueryClient();
@@ -65,7 +63,7 @@ export default function SearchMovies() {
     <>
       <Section>
         <MainContainer>
-          <Title text="Movies page" Atr="h1" />
+          <Title text="Movies page" />
           <SearchForm fetchFoo={newFetch} />
         </MainContainer>
       </Section>

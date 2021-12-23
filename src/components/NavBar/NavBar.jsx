@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import s from "./NavBar.module.css";
-import MainContainer from "../StyledComponents/MainContainer";
+import { MainContainer } from "../UtilsStyledComponents";
 
 export default function NavBar() {
   const applyClassName = ({ isActive }) => (isActive ? s.activeLink : s.link);

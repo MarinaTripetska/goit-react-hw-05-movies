@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-
 export default function SearchForm({ fetchFoo }) {
   const [query, setQuery] = useState("");
 
@@ -26,7 +25,6 @@ export default function SearchForm({ fetchFoo }) {
       <input
         type="text"
         autoComplete="off"
-        autoFocus
         placeholder="Search movies"
         value={query}
         onChange={(e) => setQuery(e.target.value)}

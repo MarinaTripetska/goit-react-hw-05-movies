@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import PulseLoader from "react-spinners/PulseLoader";
 import s from "./Loaders.module.css";
-import MainContainer from "../StyledComponents/MainContainer";
+import { MainContainer } from "../UtilsStyledComponents";
 const loaderStyles = css`
   display: block;
   margin: 40px;

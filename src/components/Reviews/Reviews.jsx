@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import SmallLoader from "../Loaders/SmallLoader";
 import { getReviewsById } from "../../API/get";
-import Section from "../StyledComponents/Section";
+import { Section } from "../UtilsStyledComponents";
 import s from "./Reviews.module.css";
 
 export default function Reviews() {
@@ -29,8 +29,6 @@ export default function Reviews() {
       sectionDOMElem.scrollIntoView({ behavior: "smooth" });
     }
   }, [reviews]);
-
-  // const handleReadMoreClick = () => {};
 
   if (isLoading) {
     return (

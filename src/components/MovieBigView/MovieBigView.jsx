@@ -12,7 +12,7 @@ import GoBackButton from "../GoBackButton/GoBackButton";
 import defaultImage from "../../images/movie-poster.jpg";
 import MainLoader from "../Loaders/MainLoader";
 import SmallLoader from "../Loaders/SmallLoader";
-import Section from "../StyledComponents/Section";
+import { Section } from "../UtilsStyledComponents";
 import s from "./MovieBigView.module.css";
 
 const Cast = lazy(() => import("../Cast" /* webpackChunkName: "cast" */));

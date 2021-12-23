@@ -1,3 +1,5 @@
+import { Title } from "components/UtilsStyledComponents";
+
 export default function PageNotFound() {
-  return <h1>Page not found!</h1>;
+  return <Title text="Page not found!" />;
 }

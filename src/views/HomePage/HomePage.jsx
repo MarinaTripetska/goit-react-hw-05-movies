@@ -1,11 +1,13 @@
 import { useQuery } from "react-query";
-import { getPopularMovie } from "../../API/get";
-import MovieList from "../../components/MovieList";
-import MainContainer from "../../components/StyledComponents/MainContainer";
-import Section from "../../components/StyledComponents/Section";
-import MainLoader from "../../components/Loaders/MainLoader";
-import Footer from "../../components/Footer";
-import Title from "../../components/Title";
+import { getPopularMovie } from "API/get";
+import MovieList from "components/MovieList";
+import {
+  MainContainer,
+  Section,
+  Title,
+} from "components/UtilsStyledComponents";
+import MainLoader from "components/Loaders/MainLoader";
+import Footer from "components/Footer";
 
 export default function HomePage() {
   const {
@@ -32,7 +34,7 @@ export default function HomePage() {
         <main className="mainContent">
           <Section>
             <MainContainer>
-              <Title text="Home page" Atr="h1" />
+              <Title text="Home page" />
               <MovieList movies={movies} />
             </MainContainer>
           </Section>

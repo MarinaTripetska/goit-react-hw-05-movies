@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import SmallLoader from "../Loaders/SmallLoader";
 import { getCastById } from "../../API/get";
-import Section from "../StyledComponents/Section";
+import { Section } from "../UtilsStyledComponents";
 import s from "./Cast.module.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";

@@ -1,5 +1,4 @@
-import Section from "../StyledComponents/Section";
-import MainContainer from "../StyledComponents/MainContainer";
+import { MainContainer, Section } from "../UtilsStyledComponents";
 import s from "./Footer.module.css";
 
 export default function Footer() {
