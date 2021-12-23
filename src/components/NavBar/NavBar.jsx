@@ -1,16 +1,22 @@
 import { NavLink } from "react-router-dom";
-import "./NavBar.css";
+import s from "./NavBar.module.css";
+import MainContainer from "../StyledComponents/MainContainer";
+
 export default function NavBar() {
+  const applyClassName = ({ isActive }) => (isActive ? s.activeLink : s.link);
+
   return (
     <header>
-      <nav>
-        <NavLink className="nav-item" to="/">
-          Home
-        </NavLink>
-        <NavLink className="nav-item" to="/movies">
-          Movies
-        </NavLink>
-      </nav>
+      <MainContainer>
+        <nav className={s.nav}>
+          <NavLink className={applyClassName} to="/">
+            Home
+          </NavLink>
+          <NavLink className={applyClassName} to="/movies">
+            Movies
+          </NavLink>
+        </nav>
+      </MainContainer>
     </header>
   );
 }

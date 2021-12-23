@@ -1,52 +1,44 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import slugify from "slugify";
-import { fetchMovie } from "../../API/get";
+import { useQuery } from "react-query";
+import { getPopularMovie } from "../../API/get";
+import MovieList from "../../components/MovieList";
+import MainContainer from "../../components/StyledComponents/MainContainer";
+import Section from "../../components/StyledComponents/Section";
+import MainLoader from "../../components/Loaders/MainLoader";
+import Footer from "../../components/Footer";
+import Title from "../../components/Title";
 
 export default function HomePage() {
-  const [movies, setMovies] = useState(null);
+  const {
+    data: movies,
+    isError,
+    error,
+    isLoading,
+    isSuccess,
+  } = useQuery("popularMovies", () => getPopularMovie("trending/movie/week"), {
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
 
-  const location = useLocation();
-  console.log(location);
-
-  useEffect(() => {
-    fetchMovie("/trending/movie/week").then((resp) =>
-      setMovies(resp.data.results)
+  if (isError) {
+    return <p>Ooops... Something went wrong! Error: {error}</p>;
+  }
+  if (isLoading) {
+    return <MainLoader />;
+  }
+  if (isSuccess) {
+    return (
+      <>
+        <main className="mainContent">
+          <Section>
+            <MainContainer>
+              <Title text="Home page" Atr="h1" />
+              <MovieList movies={movies} />
+            </MainContainer>
+          </Section>
+        </main>
+        <Footer />
+      </>
     );
-  }, []);
-
-  return (
-    <main>
-      <h1>Home page</h1>
-      <ul>
-        {movies &&
-          movies.map((movie) => {
-            const movieSlugify = slugify(movie.title, {
-              lower: true,
-              strict: true,
-            });
-
-            return (
-              <li key={movie.id}>
-                <Link
-                  to={`/movies/${movieSlugify}-${movie.id}`}
-                  state={{
-                    from: location,
-
-                    // label: location.state.label,
-                  }}
-                >
-                  <img
-                    src={`https://www.themoviedb.org/t/p/w440_and_h660_face/${movie.poster_path}`}
-                    alt={movie.title}
-                    width="250"
-                  />
-                  <p>{movie.title}</p>
-                </Link>
-              </li>
-            );
-          })}
-      </ul>
-    </main>
-  );
+  }
 }

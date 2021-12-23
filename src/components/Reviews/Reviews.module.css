@@ -1,0 +1,23 @@
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 15px;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.item {
+  max-width: 450px;
+  background-color: whitesmoke;
+  padding: 30px 15px;
+}
+.author {
+}
+.content {
+}
+.noFound {
+}

@@ -1,0 +1,46 @@
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 15px;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.item {
+  flex: 1 1 100%;
+  max-width: 150px;
+  min-height: 308px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+  background-color: #ffe4c4;
+  border: solid 1px rgb(199, 158, 151);
+  border-radius: 3px;
+}
+.character,
+.actor {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+.bold {
+  font-weight: 700;
+}
+.avatarThumb {
+  align-self: end;
+
+  width: 130px;
+  height: 195px;
+  background-image: url("../../images/avatar.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+}

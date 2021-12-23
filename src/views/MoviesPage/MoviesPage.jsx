@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
 
+import Footer from "../../components/Footer";
 export default function MoviesPage() {
   return (
-    <main>
-      <h1>Movies page</h1>
-
-      <Outlet />
-    </main>
+    <>
+      <main className="mainContent">
+        <Outlet />
+      </main>
+      <Footer />
+    </>
   );
 }
