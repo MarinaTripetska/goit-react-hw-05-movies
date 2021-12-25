@@ -23,7 +23,7 @@ export default function HomePage() {
   });
 
   if (isError) {
-    return <p>Ooops... Something went wrong! Error: {error}</p>;
+    return <p>Ooops... Something went wrong! Error: {error.message}</p>;
   }
   if (isLoading) {
     return <MainLoader />;

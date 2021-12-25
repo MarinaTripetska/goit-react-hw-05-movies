@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useQueryClient, useQuery } from "react-query";
-import { fetchSearchMovies } from "../../API/get";
+import { fetchSearchMovies } from "API/get";
 import SearchForm from "../SearchForm";
 import MovieList from "../MovieList";
 import Pagination from "../Pagination";
 import MainLoader from "../Loaders/MainLoader";
-import { MainContainer, Section, Title } from "../UtilsStyledComponents";
+import { Title } from "../UtilsStyledComponents";
 
 export default function SearchMovies() {
   const queryClient = useQueryClient();
@@ -61,34 +61,20 @@ export default function SearchMovies() {
 
   return (
     <>
-      <Section>
-        <MainContainer>
-          <Title text="Movies page" />
-          <SearchForm fetchFoo={newFetch} />
-        </MainContainer>
-      </Section>
+      <Title text="Movies page" />
+      <SearchForm fetchFoo={newFetch} />
 
       {isLoading || isFetching ? <MainLoader /> : <></>}
-
-      {isError && (
-        <Section>
-          <MainContainer>
-            <p>{error.message}</p>
-          </MainContainer>
-        </Section>
-      )}
-
+      {isError && <p>{error.message}</p>}
       {isSuccess && (
-        <Section>
-          <MainContainer>
-            <MovieList movies={data.results} />
-            <Pagination
-              page={page}
-              setPage={handlePageChange}
-              isLastPage={isLastPage}
-            />
-          </MainContainer>
-        </Section>
+        <>
+          <MovieList movies={data.results} />
+          <Pagination
+            page={page}
+            setPage={handlePageChange}
+            isLastPage={isLastPage}
+          />
+        </>
       )}
     </>
   );

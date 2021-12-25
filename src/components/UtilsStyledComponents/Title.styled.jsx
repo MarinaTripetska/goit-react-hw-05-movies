@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 
 const TitleBase = styled.h1`
   text-transform: uppercase;
-  text-align: center;
+  /* text-align: center; */
+  color: var(--main-txt-color);
   margin-bottom: 35px;
 `;
 

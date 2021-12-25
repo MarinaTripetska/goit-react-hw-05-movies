@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { MainContainer, Section } from "components/UtilsStyledComponents";
-import Footer from "../../components/Footer";
+import Footer from "components/Footer";
 
 export default function MoviesPage() {
   return (
@@ -10,7 +10,7 @@ export default function MoviesPage() {
           <main className="mainContent">
             <Outlet />
           </main>
-        </MainContainer>{" "}
+        </MainContainer>
       </Section>
       <Footer />
     </>

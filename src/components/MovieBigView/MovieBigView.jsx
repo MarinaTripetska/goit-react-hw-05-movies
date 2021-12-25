@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getMovieById } from "../../API/get";
-import GoBackButton from "../GoBackButton/GoBackButton";
+// import GoBackButton from "../GoBackButton/GoBackButton";
 import defaultImage from "../../images/movie-poster.jpg";
 import MainLoader from "../Loaders/MainLoader";
 import SmallLoader from "../Loaders/SmallLoader";
@@ -57,7 +57,7 @@ export default function Movie() {
     return (
       <>
         <Section>
-          <GoBackButton />
+          {/* <GoBackButton /> */}
           <div className={s.movieThumb}>
             <div className={s.posterPart}>
               <img

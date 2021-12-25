@@ -1,5 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { Background, Form, Button, Input } from "./SearchForm.styled";
+import { ImSearch } from "react-icons/im";
 export default function SearchForm({ fetchFoo }) {
   const [query, setQuery] = useState("");
 
@@ -17,19 +19,21 @@ export default function SearchForm({ fetchFoo }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit" aria-label="Search images">
-        <span>Search</span>
-      </button>
+    <Background>
+      <Form onSubmit={handleSubmit}>
+        <Button type="submit" title="Search images. Click for find movies">
+          <ImSearch />
+        </Button>
 
-      <input
-        type="text"
-        autoComplete="off"
-        placeholder="Search movies"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-    </form>
+        <Input
+          type="text"
+          autoComplete="off"
+          placeholder="Search movies"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </Form>
+    </Background>
   );
 }
 
