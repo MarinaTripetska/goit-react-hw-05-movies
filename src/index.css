@@ -1,10 +1,11 @@
 @import "normalize.css";
 
 :root {
-  --main-bg-color: rgb(22, 22, 22);
+  --main-bg-color: #161616;
   --card-bg-color: #435a4c;
-  --main-txt-color: rgb(238, 173, 113);
-  --txt-color: rgb(156, 156, 156);
+  --main-txt-color: #eead71;
+  --main-text-color-hover: #df730e;
+  --txt-color: #9c9c9c;
 }
 
 html {

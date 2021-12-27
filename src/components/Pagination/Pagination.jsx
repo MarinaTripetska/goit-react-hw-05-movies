@@ -1,28 +1,29 @@
 import PropTypes from "prop-types";
-
+import { Container, Button, PageNum } from "./Pagination.styled";
+import { ImArrowLeft2, ImArrowRight2 } from "react-icons/im";
 export default function Pagination({ page, setPage, isLastPage }) {
   return (
-    <div>
-      <button
+    <Container>
+      <Button
         type="button"
         aria-label="Previous page"
         onClick={() => setPage(-1)}
         disabled={page === 1}
       >
-        Prev
-      </button>
+        <ImArrowLeft2 />
+      </Button>
 
-      <p>{page}</p>
+      <PageNum>{page}</PageNum>
 
-      <button
+      <Button
         type="button"
         aria-label="Next page"
         onClick={() => setPage(1)}
         disabled={isLastPage}
       >
-        Next
-      </button>
-    </div>
+        <ImArrowRight2 />
+      </Button>
+    </Container>
   );
 }
 

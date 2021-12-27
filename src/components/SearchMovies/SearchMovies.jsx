@@ -13,26 +13,23 @@ export default function SearchMovies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query");
   const page = Number(searchParams.get("page"));
-
   const { data, isLoading, isFetching, isError, error, isSuccess } = useQuery(
     ["searchedMovies", query, page],
-
     () => {
       return fetchSearchMovies(query, page);
     },
-
     {
       enabled: !!query && !!page,
       staleTime: 60_000 * 10,
       keepPreviousData: true,
     }
   );
-
   const isLastPage = page === data?.total_pages;
 
   useEffect(() => {
+    console.log("its happend?");
     if (!query || isLastPage) return;
-
+    console.log("its happend?2");
     queryClient.prefetchQuery(
       ["searchedMovies", query, page + 1],
       () => {
@@ -51,7 +48,6 @@ export default function SearchMovies() {
 
   const newFetch = (newQuery) => {
     if (newQuery === query) return;
-
     setSearchParams({ query: newQuery, page: 1 });
   };
 
@@ -66,7 +62,7 @@ export default function SearchMovies() {
 
       {isLoading || isFetching ? <MainLoader /> : <></>}
       {isError && <p>{error.message}</p>}
-      {isSuccess && (
+      {isSuccess && data.total_results && (
         <>
           <MovieList movies={data.results} />
           <Pagination
