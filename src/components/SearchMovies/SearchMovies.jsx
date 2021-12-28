@@ -27,9 +27,8 @@ export default function SearchMovies() {
   const isLastPage = page === data?.total_pages;
 
   useEffect(() => {
-    console.log("its happend?");
     if (!query || isLastPage) return;
-    console.log("its happend?2");
+
     queryClient.prefetchQuery(
       ["searchedMovies", query, page + 1],
       () => {

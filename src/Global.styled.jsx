@@ -41,6 +41,10 @@ const styles = css`
     margin: 0;
     padding: 0;
   }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
   .mainContent {
     min-height: calc(100vh - 145px);
   }

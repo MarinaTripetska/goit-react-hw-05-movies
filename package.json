@@ -12,7 +12,6 @@
     "mrm": "^3.0.10",
     "netlify-cli": "^8.0.15",
     "normalize.css": "^8.0.1",
-    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
@@ -55,7 +54,8 @@
   "devDependencies": {
     "eslint": "^7.11.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.2"
+    "lint-staged": "^12.1.2",
+    "prop-types": "^15.8.0"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"

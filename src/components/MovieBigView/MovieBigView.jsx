@@ -1,17 +1,12 @@
 import { Suspense, lazy } from "react";
-import {
-  NavLink,
-  useParams,
-  useLocation,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { useParams, Routes, Route } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getMovieById } from "../../API/get";
 import defaultImage from "../../images/movie-poster.jpg";
 import MainLoader from "../Loaders/MainLoader";
 import SmallLoader from "../Loaders/SmallLoader";
 import { Section } from "../UtilsStyledComponents";
+import { NavigationCastReview } from "../NavigationCastReview";
 import s from "./MovieBigView.module.css";
 
 const Cast = lazy(() => import("../Cast" /* webpackChunkName: "cast" */));
@@ -22,9 +17,6 @@ const Reviews = lazy(() =>
 export default function Movie() {
   const { slug } = useParams();
   const movieID = slug.match(/[a-z0-9]+$/)[0];
-  const location = useLocation();
-
-  const applyClassName = ({ isActive }) => (isActive ? s.activeLink : s.link);
 
   const {
     data: movie,
@@ -85,24 +77,7 @@ export default function Movie() {
           </div>
         </Section>
         <Section>
-          <nav className={s.nav}>
-            <NavLink
-              className={applyClassName}
-              to={`cast`}
-              state={{ from: location.state?.from }}
-              replace
-            >
-              Cast
-            </NavLink>
-            <NavLink
-              className={applyClassName}
-              to={`reviews`}
-              state={{ from: location.state?.from }}
-              replace
-            >
-              Revives
-            </NavLink>
-          </nav>
+          <NavigationCastReview />
 
           <Suspense fallback={<SmallLoader />}>
             <Routes>
