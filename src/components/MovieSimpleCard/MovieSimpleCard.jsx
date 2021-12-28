@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 import { slugTransform } from "../../helperFoo/slugify";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -46,3 +47,12 @@ export default function MovieSimpleCard({ movie }) {
     </Link>
   );
 }
+MovieSimpleCard.propTypes = {
+  movie: PropTypes.exact({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    poster_path: PropTypes.string.isRequired,
+    release_date: PropTypes.string,
+    vote_average: PropTypes.number,
+  }).isRequired,
+};

@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getMovieById } from "../../API/get";
-// import GoBackButton from "../GoBackButton/GoBackButton";
 import defaultImage from "../../images/movie-poster.jpg";
 import MainLoader from "../Loaders/MainLoader";
 import SmallLoader from "../Loaders/SmallLoader";
@@ -57,7 +56,6 @@ export default function Movie() {
     return (
       <>
         <Section>
-          {/* <GoBackButton /> */}
           <div className={s.movieThumb}>
             <div className={s.posterPart}>
               <img
@@ -85,6 +83,8 @@ export default function Movie() {
               )}
             </div>
           </div>
+        </Section>
+        <Section>
           <nav className={s.nav}>
             <NavLink
               className={applyClassName}
@@ -103,20 +103,14 @@ export default function Movie() {
               Revives
             </NavLink>
           </nav>
-        </Section>
 
-        <Suspense
-          fallback={
-            <Section>
-              <SmallLoader />
-            </Section>
-          }
-        >
-          <Routes>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Routes>
-        </Suspense>
+          <Suspense fallback={<SmallLoader />}>
+            <Routes>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Routes>
+          </Suspense>
+        </Section>
       </>
     );
   }

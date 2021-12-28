@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import SmallLoader from "../Loaders/SmallLoader";
 import { getCastById } from "../../API/get";
-import { Section } from "../UtilsStyledComponents";
 import s from "./Cast.module.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
@@ -32,24 +31,16 @@ export default function Cast() {
   }, [cast]);
 
   if (isLoading) {
-    return (
-      <Section>
-        <SmallLoader />
-      </Section>
-    );
+    return <SmallLoader />;
   }
 
   if (isError) {
-    return (
-      <Section>
-        <p>Something went wrong... {error}</p>
-      </Section>
-    );
+    return <p>Something went wrong... {error}</p>;
   }
 
   if (isSuccess) {
     return (
-      <Section ref={section}>
+      <div ref={section}>
         <h2 className={s.title}>Cast</h2>
 
         {cast.length > 0 ? (
@@ -78,7 +69,7 @@ export default function Cast() {
         ) : (
           <p>The cast not described...</p>
         )}
-      </Section>
+      </div>
     );
   }
 }

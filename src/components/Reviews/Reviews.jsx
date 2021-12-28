@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import SmallLoader from "../Loaders/SmallLoader";
 import { getReviewsById } from "../../API/get";
-import { Section } from "../UtilsStyledComponents";
 import s from "./Reviews.module.css";
 
 export default function Reviews() {
@@ -31,24 +30,16 @@ export default function Reviews() {
   }, [reviews]);
 
   if (isLoading) {
-    return (
-      <Section>
-        <SmallLoader />
-      </Section>
-    );
+    return <SmallLoader />;
   }
 
   if (isError) {
-    return (
-      <Section>
-        <p>Something went wrong! Error: {error.message}</p>
-      </Section>
-    );
+    return <p>Something went wrong! Error: {error.message}</p>;
   }
 
   if (isSuccess) {
     return (
-      <Section ref={section}>
+      <div ref={section}>
         <h3 className={s.title}>Reviews</h3>
 
         {reviews.length !== 0 ? (
@@ -78,7 +69,7 @@ export default function Reviews() {
         ) : (
           <p className={s.noFound}>No reviews here...</p>
         )}
-      </Section>
+      </div>
     );
   }
 }

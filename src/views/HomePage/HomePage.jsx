@@ -20,6 +20,11 @@ export default function HomePage() {
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    select: (data) =>
+      data.map((movie) => {
+        const { title, id, poster_path, release_date, vote_average } = movie;
+        return { title, id, poster_path, release_date, vote_average };
+      }),
   });
 
   if (isError) {
