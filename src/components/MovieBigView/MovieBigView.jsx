@@ -5,9 +5,25 @@ import { getMovieById } from "../../API/get";
 import defaultImage from "../../images/movie-poster.jpg";
 import MainLoader from "../Loaders/MainLoader";
 import SmallLoader from "../Loaders/SmallLoader";
-import { Section } from "../UtilsStyledComponents";
+import { Title } from "../UtilsStyledComponents";
 import { NavigationCastReview } from "../NavigationCastReview";
-import s from "./MovieBigView.module.css";
+import {
+  MovieThumb,
+  PosterPart,
+  Poster,
+  InfoPart,
+  Overview,
+  GenresThumb,
+  PositionName,
+  GenresList,
+  Value,
+  CompanyLogoThumb,
+  CompanyLogo,
+  CompaniesList,
+  Tagline,
+} from "./MovieBigView.styled";
+import { AiOutlineStar } from "react-icons/ai";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 const Cast = lazy(() => import("../Cast" /* webpackChunkName: "cast" */));
 const Reviews = lazy(() =>
@@ -30,62 +46,112 @@ export default function Movie() {
     keepPreviousData: true,
     staleTime: 60_000 * 10,
   });
-
+  console.log(movie);
   if (isFetching || isLoading) {
     return <MainLoader />;
   }
 
   if (isError) {
-    return (
-      <Section>
-        <p>Something went wrong... {error.message}</p>
-      </Section>
-    );
+    return <p>Something went wrong... {error.message}</p>;
   }
 
   if (movie && isSuccess) {
-    const { poster_path: poster, genres, title, overview } = movie;
+    const {
+      poster_path: poster,
+      genres,
+      title,
+      tagline,
+      overview,
+      budget,
+      release_date,
+      runtime,
+      original_language,
+      vote_average,
+      production_companies,
+    } = movie;
+    const companiesWithLogo = production_companies.filter(
+      (c) => c.logo_path && c
+    );
     return (
       <>
-        <Section>
-          <div className={s.movieThumb}>
-            <div className={s.posterPart}>
-              <img
-                className={s.poster}
-                src={
-                  poster
-                    ? `https://www.themoviedb.org/t/p/w440_and_h660_face/${poster}`
-                    : defaultImage
-                }
-                alt={title}
-              />
-            </div>
-            <div className={s.infoPart}>
-              <h2 className={s.title}>{title.toUpperCase()}</h2>
-              <p className={s.descr}>{overview}</p>
-              {genres && (
-                <div className={s.genresThumb}>
-                  <p className={s.genresTitle}>Genres:</p>
-                  <ul className={s.genresList}>
-                    {genres.map(({ id, name }) => {
-                      return <li key={id}>{name}</li>;
-                    })}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-        </Section>
-        <Section>
-          <NavigationCastReview />
+        <MovieThumb>
+          <PosterPart>
+            {tagline && <Tagline>"{tagline}"</Tagline>}
+            <Poster
+              src={
+                poster
+                  ? `https://www.themoviedb.org/t/p/w440_and_h660_face/${poster}`
+                  : defaultImage
+              }
+              alt={title}
+            />
+          </PosterPart>
+          <InfoPart>
+            <Title Atr={"h2"} text={title} color="#9c9c9c" />
 
-          <Suspense fallback={<SmallLoader />}>
-            <Routes>
-              <Route path="cast" element={<Cast />} />
-              <Route path="reviews" element={<Reviews />} />
-            </Routes>
-          </Suspense>
-        </Section>
+            <Overview>{overview}</Overview>
+            <p>
+              <FaRegCalendarAlt color="#eead71" aria-label="Release date" />
+              <Value>{release_date}</Value>
+            </p>
+            <p>
+              <AiOutlineStar
+                color="#eead71"
+                aria-label="User rating of the movie"
+              />
+              <Value>{vote_average}</Value>
+            </p>
+            <p>
+              <PositionName>Budget:</PositionName>
+              <Value>{budget}$</Value>
+            </p>
+            <p>
+              <PositionName>Duration: </PositionName>
+              <Value>{runtime} min</Value>
+            </p>
+            <p>
+              <PositionName>Original language:</PositionName>
+              <Value>{original_language}</Value>
+            </p>
+            {genres && (
+              <GenresThumb>
+                <PositionName>Genres:</PositionName>
+                <GenresList>
+                  {genres.map(({ id, name }) => {
+                    return <li key={id}>{name}</li>;
+                  })}
+                </GenresList>
+              </GenresThumb>
+            )}
+            {production_companies && (
+              <>
+                <PositionName as="p">Production companies: </PositionName>
+
+                <CompaniesList>
+                  {companiesWithLogo.map((c) => (
+                    <li key={c.id}>
+                      <CompanyLogoThumb>
+                        <CompanyLogo
+                          src={`https://www.themoviedb.org/t/p/original/${c.logo_path}`}
+                          alt="production companies logo"
+                        />
+                      </CompanyLogoThumb>
+                    </li>
+                  ))}
+                </CompaniesList>
+              </>
+            )}
+          </InfoPart>
+        </MovieThumb>
+
+        <NavigationCastReview />
+
+        <Suspense fallback={<SmallLoader />}>
+          <Routes>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Routes>
+        </Suspense>
       </>
     );
   }

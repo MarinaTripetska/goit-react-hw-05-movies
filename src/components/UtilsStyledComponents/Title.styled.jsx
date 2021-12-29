@@ -3,13 +3,21 @@ import styled from "@emotion/styled";
 
 const TitleBase = styled.h1`
   text-transform: uppercase;
-  /* text-align: center; */
-  color: var(--main-txt-color);
-  margin-bottom: 35px;
+  /* color: var(--main-txt-color); */
+  margin-bottom: 20px;
+  color: ${({ color }) => (color ? color : `var(--main-txt-color)`)};
+
+  @media (min-width: 450px) {
+    margin-bottom: 35px;
+  }
 `;
 
-export const Title = ({ text, Atr }) => {
-  return <TitleBase as={Atr}>{text}</TitleBase>;
+export const Title = ({ text, Atr, ...atr }) => {
+  return (
+    <TitleBase as={Atr} {...atr}>
+      {text}
+    </TitleBase>
+  );
 };
 
 Title.defaultProps = {

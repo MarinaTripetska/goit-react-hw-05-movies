@@ -2,10 +2,8 @@ import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 
 export const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
+  margin-top: 20px;
+  background-image: linear-gradient(180deg, #334439, #151b17);
 `;
 
 export const List = styled.ul`
@@ -20,28 +18,17 @@ export const Link = styled(NavLink)`
   display: inline-block;
   position: relative;
   padding: 25px 0;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 500;
-  color: white;
-
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 22px;
-    width: 0;
-    height: 3px;
-    background-color: #f39787;
-    transition: width 200ms ease-in-out;
-  }
+  color: var(--txt-color);
+  transition: color 350ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover,
-  &:focus,
-  &.active {
-    color: #f39787;
+  &:focus {
+    color: #75db9c;
+  }
 
-    &::after {
-      width: 100%;
-    }
+  &.active {
+    color: var(--main-txt-color);
   }
 `;
