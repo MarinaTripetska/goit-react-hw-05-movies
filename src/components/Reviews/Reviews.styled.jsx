@@ -17,7 +17,7 @@ export const Item = styled.li`
   display: flex;
   flex-direction: column;
   gap: 15px;
-
+  width: 100%;
   max-height: 300px;
   overflow-y: auto;
   padding: 30px 15px;

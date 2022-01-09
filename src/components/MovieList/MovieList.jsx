@@ -1,16 +1,16 @@
 import MovieSimpleCard from "../MovieSimpleCard";
 import PropTypes from "prop-types";
-import s from "./MovieList.module.css";
+import { List, Item } from "./MovieList.styled";
 
 export default function MovieList({ movies }) {
   return (
-    <ul className={s.list}>
+    <List>
       {movies.map((movie) => (
-        <li key={movie.id} className={s.item}>
+        <Item key={movie.id}>
           <MovieSimpleCard movie={movie} />
-        </li>
+        </Item>
       ))}
-    </ul>
+    </List>
   );
 }
 

@@ -1,6 +1,22 @@
 import { Link, useLocation } from "react-router-dom";
-import s from "./GoBackButtom.module.css";
 import { ImArrowLeft2 } from "react-icons/im";
+import styled from "@emotion/styled";
+
+const StyledLink = styled(Link)(`
+  display: inline-block;
+  position: absolute;
+  left: 30px;
+  top: 15px;
+  padding: 5px;
+  text-decoration: none;
+  color: var(--txt-color);
+
+  transition: color 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+&:hover,
+&:focus {
+  color: #75db9c;
+`);
 
 export default function GoBackButton() {
   const location = useLocation();
@@ -8,12 +24,11 @@ export default function GoBackButton() {
   const search = location.state?.from?.search;
 
   return (
-    <Link
+    <StyledLink
       to={pathname ? `${pathname}${search}` : "/"}
-      className={s.btn}
       title="Comeback button"
     >
       <ImArrowLeft2 />
-    </Link>
+    </StyledLink>
   );
 }
