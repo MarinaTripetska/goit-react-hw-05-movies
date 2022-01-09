@@ -2,13 +2,12 @@ import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 
 export const Nav = styled.nav`
-  margin-top: 20px;
   background-image: linear-gradient(180deg, #334439, #151b17);
 `;
 
 export const List = styled.ul`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 35px;
   max-width: 260px;

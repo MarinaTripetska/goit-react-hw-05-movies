@@ -3,7 +3,15 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import SmallLoader from "../Loaders/SmallLoader";
 import { getCastById } from "../../API/get";
-import s from "./Cast.module.css";
+import { Section, MainContainer, Title } from "../UtilsStyledComponents";
+import {
+  NoResultMessage,
+  List,
+  Card,
+  InfoParagraph,
+  AvatarThumb,
+} from "./Cast.styled";
+
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -35,41 +43,43 @@ export default function Cast() {
   }
 
   if (isError) {
-    return <p>Something went wrong... {error}</p>;
+    return <NoResultMessage>Something went wrong... {error}</NoResultMessage>;
   }
 
   if (isSuccess) {
     return (
-      <div ref={section}>
-        <h2 className={s.title}>Cast</h2>
+      <Section ref={section}>
+        <MainContainer>
+          <Title Atr={"h2"} text="Cast" />
 
-        {cast.length > 0 ? (
-          <ul className={s.list}>
-            {cast.map((c) => (
-              <li key={c.cast_id} className={s.item}>
-                <p className={s.character}>
-                  <span className={s.bold}>Character:</span> {c.character}
-                </p>
-                <p className={s.actor}>
-                  <span className={s.bold}>Actor name:</span> {c.name}
-                </p>
-                <div className={s.avatarThumb}>
-                  {c.profile_path && (
-                    <LazyLoadImage
-                      effect="blur"
-                      alt={c.name}
-                      src={`https://www.themoviedb.org/t/p/w440_and_h660_face/${c.profile_path}`}
-                      width="130"
-                    />
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>The cast not described...</p>
-        )}
-      </div>
+          {cast.length > 0 ? (
+            <List>
+              {cast.map((c) => (
+                <Card key={c.cast_id}>
+                  <InfoParagraph>
+                    <b>Character:</b> {c.character}
+                  </InfoParagraph>
+                  <InfoParagraph>
+                    <b>Actor name:</b> {c.name}
+                  </InfoParagraph>
+                  <AvatarThumb>
+                    {c.profile_path && (
+                      <LazyLoadImage
+                        effect="blur"
+                        alt={c.name}
+                        src={`https://www.themoviedb.org/t/p/w440_and_h660_face/${c.profile_path}`}
+                        width="130"
+                      />
+                    )}
+                  </AvatarThumb>
+                </Card>
+              ))}
+            </List>
+          ) : (
+            <NoResultMessage>The cast not described...</NoResultMessage>
+          )}
+        </MainContainer>
+      </Section>
     );
   }
 }

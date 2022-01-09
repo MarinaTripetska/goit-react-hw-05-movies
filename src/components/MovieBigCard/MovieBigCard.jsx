@@ -1,12 +1,5 @@
-import { Suspense, lazy } from "react";
-import { useParams, Routes, Route } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getMovieById } from "../../API/get";
-import defaultImage from "../../images/movie-poster.jpg";
-import MainLoader from "../Loaders/MainLoader";
-import SmallLoader from "../Loaders/SmallLoader";
-import { Title } from "../UtilsStyledComponents";
-import { NavigationCastReview } from "../NavigationCastReview";
+import PropTypes from "prop-types";
+import { Title, Section, MainContainer } from "../UtilsStyledComponents";
 import {
   MovieThumb,
   PosterPart,
@@ -21,73 +14,45 @@ import {
   CompanyLogo,
   CompaniesList,
   Tagline,
-} from "./MovieBigView.styled";
-import { AiOutlineStar } from "react-icons/ai";
+} from "./MovieBigCard.styled";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { AiOutlineStar } from "react-icons/ai";
 
-const Cast = lazy(() => import("../Cast" /* webpackChunkName: "cast" */));
-const Reviews = lazy(() =>
-  import("../Reviews" /* webpackChunkName: "reviews" */)
-);
-
-export default function Movie() {
-  const { slug } = useParams();
-  const movieID = slug.match(/[a-z0-9]+$/)[0];
-
+export default function MovieBigCard({ movie }) {
   const {
-    data: movie,
-    error,
-    isError,
-    isLoading,
-    isFetching,
-    isSuccess,
-  } = useQuery(["movie", movieID], () => getMovieById(movieID), {
-    enabled: Boolean(movieID),
-    keepPreviousData: true,
-    staleTime: 60_000 * 10,
-  });
+    poster_path: poster,
+    genres,
+    title,
+    tagline,
+    overview,
+    budget,
+    release_date,
+    runtime,
+    original_language,
+    vote_average,
+    production_companies,
+  } = movie;
 
-  if (isFetching || isLoading) {
-    return <MainLoader />;
-  }
+  const companiesWithLogo = production_companies.filter(
+    (c) => c.logo_path && c
+  );
 
-  if (isError) {
-    return <p>Something went wrong... {error.message}</p>;
-  }
-
-  if (movie && isSuccess) {
-    const {
-      poster_path: poster,
-      genres,
-      title,
-      tagline,
-      overview,
-      budget,
-      release_date,
-      runtime,
-      original_language,
-      vote_average,
-      production_companies,
-    } = movie;
-    const companiesWithLogo = production_companies.filter(
-      (c) => c.logo_path && c
-    );
-    return (
-      <>
+  return (
+    <Section>
+      <MainContainer>
         <MovieThumb>
           <PosterPart>
             {tagline && <Tagline>"{tagline}"</Tagline>}
-            <Poster
-              src={
-                poster
-                  ? `https://www.themoviedb.org/t/p/w440_and_h660_face/${poster}`
-                  : defaultImage
-              }
-              alt={title}
-            />
+
+            {poster ? (
+              <Poster
+                src={`https://www.themoviedb.org/t/p/w440_and_h660_face/${poster}`}
+                alt={title}
+              />
+            ) : null}
           </PosterPart>
           <InfoPart>
-            <Title Atr={"h2"} text={title} color="#9c9c9c" />
+            <Title Atr={"h2"} text={title} />
 
             <Overview>{overview}</Overview>
             <p>
@@ -143,16 +108,11 @@ export default function Movie() {
             )}
           </InfoPart>
         </MovieThumb>
-
-        <NavigationCastReview />
-
-        <Suspense fallback={<SmallLoader />}>
-          <Routes>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Routes>
-        </Suspense>
-      </>
-    );
-  }
+      </MainContainer>
+    </Section>
+  );
 }
+
+MovieBigCard.propTypes = {
+  movie: PropTypes.object.isRequired,
+};

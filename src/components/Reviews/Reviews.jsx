@@ -1,12 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import SmallLoader from "../Loaders/SmallLoader";
 import { getReviewsById } from "../../API/get";
-import s from "./Reviews.module.css";
+import { Section, MainContainer, Title } from "../UtilsStyledComponents";
+import {
+  List,
+  Item,
+  NoResultMessage,
+  Author,
+  Message,
+  CreatedDate,
+} from "./Reviews.styled";
 
 export default function Reviews() {
-  const [showMore, setShowMore] = useState(false);
   const { slug } = useParams();
   const section = useRef();
 
@@ -34,42 +41,36 @@ export default function Reviews() {
   }
 
   if (isError) {
-    return <p>Something went wrong! Error: {error.message}</p>;
+    return (
+      <NoResultMessage>
+        Something went wrong! Error: {error.message}
+      </NoResultMessage>
+    );
   }
 
   if (isSuccess) {
     return (
-      <div ref={section}>
-        <h3 className={s.title}>Reviews</h3>
+      <Section ref={section}>
+        <MainContainer>
+          <Title Atr={"h2"} text="Reviews" />
 
-        {reviews.length !== 0 ? (
-          <ul className={s.list}>
-            {reviews.map((r) => (
-              <li key={r.id} className={s.item}>
-                <p className={s.author}>{r.author}</p>
-
-                {r.content.length < 200 || !!showMore ? (
-                  <p className={s.txt}>{r.content}</p>
-                ) : (
-                  <>
-                    <p className={s.txt}>{r.content.slice(0, 199) + "..."}</p>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowMore(!showMore);
-                      }}
-                    >
-                      Read more
-                    </button>
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className={s.noFound}>No reviews here...</p>
-        )}
-      </div>
+          {reviews.length !== 0 ? (
+            <List>
+              {reviews.map(({ id, author, content, created_at }) => (
+                <Item key={id}>
+                  <Author>{author}</Author>
+                  <Message>{content}</Message>
+                  <CreatedDate>
+                    {new Date(created_at).toLocaleDateString()}
+                  </CreatedDate>
+                </Item>
+              ))}
+            </List>
+          ) : (
+            <NoResultMessage>No reviews here...</NoResultMessage>
+          )}
+        </MainContainer>
+      </Section>
     );
   }
 }

@@ -6,7 +6,7 @@ import SearchForm from "../SearchForm";
 import MovieList from "../MovieList";
 import Pagination from "../Pagination";
 import MainLoader from "../Loaders/MainLoader";
-import { Title } from "../UtilsStyledComponents";
+import { Title, Section } from "../UtilsStyledComponents";
 
 export default function SearchMovies() {
   const queryClient = useQueryClient();
@@ -55,12 +55,14 @@ export default function SearchMovies() {
   };
 
   return (
-    <>
+    <Section>
       <Title text="Movies page" />
       <SearchForm fetchFoo={newFetch} />
 
       {isLoading || isFetching ? <MainLoader /> : <></>}
+
       {isError && <p>{error.message}</p>}
+
       {isSuccess && data.total_results && (
         <>
           <MovieList movies={data.results} />
@@ -71,6 +73,6 @@ export default function SearchMovies() {
           />
         </>
       )}
-    </>
+    </Section>
   );
 }

@@ -3,9 +3,13 @@ import styled from "@emotion/styled";
 
 const TitleBase = styled.h1`
   text-transform: uppercase;
-  /* color: var(--main-txt-color); */
+  text-align: center;
+  font-size: 24px;
+  line-height: 2;
+  font-style: italic;
+
   margin-bottom: 20px;
-  color: ${({ color }) => (color ? color : `var(--main-txt-color)`)};
+  color: ${({ color }) => (color ? color : `var(--txt-color)`)};
 
   @media (min-width: 450px) {
     margin-bottom: 35px;

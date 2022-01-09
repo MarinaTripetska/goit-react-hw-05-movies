@@ -7,7 +7,6 @@ import {
   Title,
 } from "components/UtilsStyledComponents";
 import MainLoader from "components/Loaders/MainLoader";
-import Footer from "components/Footer";
 
 export default function HomePage() {
   const {
@@ -36,7 +35,7 @@ export default function HomePage() {
   if (isSuccess) {
     return (
       <>
-        <main className="mainContent">
+        <main>
           <Section>
             <MainContainer>
               <Title text="Home page" />
@@ -44,7 +43,6 @@ export default function HomePage() {
             </MainContainer>
           </Section>
         </main>
-        <Footer />
       </>
     );
   }
