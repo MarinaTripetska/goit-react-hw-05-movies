@@ -46,7 +46,7 @@ export default function Movie() {
     keepPreviousData: true,
     staleTime: 60_000 * 10,
   });
-  console.log(movie);
+
   if (isFetching || isLoading) {
     return <MainLoader />;
   }
