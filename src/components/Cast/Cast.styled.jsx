@@ -33,6 +33,7 @@ export const Card = styled.li`
 export const InfoParagraph = styled.p`
   font-style: italic;
   font-size: 14px;
+  color: var(--dark-color);
 `;
 
 export const AvatarThumb = styled.div`

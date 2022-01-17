@@ -43,7 +43,7 @@ const fetchSearchMovies = async (query, page) => {
   const resp = await api.get(
     `search/movie?api_key=d5c0d1b8be0f887d4d98094b30567821&language=en-US&query=${query}&page=${page}&include_adult=false`
   );
-  console.log(resp.data);
+
   return resp.data;
 };
 

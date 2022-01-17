@@ -12,10 +12,11 @@ const StyledLink = styled(Link)(`
   color: var(--txt-color);
 
   transition: color 350ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-&:hover,
-&:focus {
-  color: #75db9c;
+
+  &:hover,
+  &:focus {
+  color: var(--txt-hover-color);
+  }
 `);
 
 export default function GoBackButton() {

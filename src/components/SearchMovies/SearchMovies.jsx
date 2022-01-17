@@ -6,13 +6,15 @@ import SearchForm from "../SearchForm";
 import MovieList from "../MovieList";
 import Pagination from "../Pagination";
 import MainLoader from "../Loaders/MainLoader";
-import { Title, Section } from "../UtilsStyledComponents";
+import { Title, Section, MainContainer } from "../UtilsStyledComponents";
 
 export default function SearchMovies() {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
+
   const query = searchParams.get("query");
   const page = Number(searchParams.get("page"));
+
   const { data, isLoading, isFetching, isError, error, isSuccess } = useQuery(
     ["searchedMovies", query, page],
     () => {
@@ -24,6 +26,7 @@ export default function SearchMovies() {
       keepPreviousData: true,
     }
   );
+
   const isLastPage = page === data?.total_pages;
 
   useEffect(() => {
@@ -57,21 +60,27 @@ export default function SearchMovies() {
   return (
     <Section>
       <Title text="Movies page" />
+
       <SearchForm fetchFoo={newFetch} />
 
-      {isLoading || isFetching ? <MainLoader /> : <></>}
-
+      {isLoading || isFetching ? <MainLoader /> : null}
       {isError && <p>{error.message}</p>}
 
-      {isSuccess && data.total_results && (
-        <>
-          <MovieList movies={data.results} />
-          <Pagination
-            page={page}
-            setPage={handlePageChange}
-            isLastPage={isLastPage}
-          />
-        </>
+      {isSuccess && (
+        <MainContainer>
+          {data.results.length > 0 ? (
+            <>
+              <MovieList movies={data.results} />
+              <Pagination
+                page={page}
+                setPage={handlePageChange}
+                isLastPage={isLastPage}
+              />
+            </>
+          ) : (
+            <p>Nothing found for your search {query} </p>
+          )}
+        </MainContainer>
       )}
     </Section>
   );

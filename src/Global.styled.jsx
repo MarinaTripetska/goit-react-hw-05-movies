@@ -1,12 +1,13 @@
 import { css, Global } from "@emotion/react";
 const styles = css`
   :root {
-    --main-bg-color: #161616;
+    --dark-color: #161616;
     --card-bg-color: #435a4c;
     --main-txt-color: #eead71;
     --main-text-color-hover: #df730e;
     --txt-color: #9c9c9c;
     --txt-color-green: #8aa54c;
+    --txt-hover-color: #75db9c;
   }
   html {
     box-sizing: border-box;
@@ -22,9 +23,10 @@ const styles = css`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
       "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
       "Helvetica Neue", sans-serif;
-
-    background-color: var(--main-bg-color);
+    color: var(--txt-color);
+    background-color: var(--dark-color);
   }
+
   #root {
     display: flex;
     flex-direction: column;
@@ -34,6 +36,7 @@ const styles = css`
   main {
     flex: 2 0 100%;
   }
+
   body,
   p,
   h1,

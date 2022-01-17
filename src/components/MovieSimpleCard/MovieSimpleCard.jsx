@@ -47,8 +47,9 @@ export default function MovieSimpleCard({ movie }) {
     </Link>
   );
 }
+
 MovieSimpleCard.propTypes = {
-  movie: PropTypes.exact({
+  movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     poster_path: PropTypes.string.isRequired,

@@ -32,7 +32,7 @@ export default function HomePage() {
   if (isLoading) {
     return <MainLoader />;
   }
-  if (isSuccess) {
+  if (isSuccess && movies.length > 0) {
     return (
       <>
         <main>
