@@ -3,25 +3,15 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "components/NavBar";
 import MainLoader from "components/Loaders/MainLoader";
 import Footer from "components/Footer/Footer";
-const HomePage = lazy(() =>
-  import("./views/HomePage" /* webpackChunkName: "page-home" */)
-);
-const MoviesPage = lazy(() =>
-  import("./views/MoviesPage" /* webpackChunkName: "page-movies" */)
-);
-const MovieBigViewPage = lazy(() =>
-  import(
-    "./components/MovieBigViewPage" /* webpackChunkName: "movie-big-view-page" */
-  )
-);
-const PageNotFound = lazy(() =>
-  import("././views/PageNotFound" /* webpackChunkName: "page-not-found" */)
-);
-const SearchMovies = lazy(() =>
-  import(
-    "./components/SearchMovies" /* webpackChunkName: "movies-search-view" */
-  )
-);
+
+const load = (componentPath) => lazy(() => import(`./${componentPath}`));
+
+const HomePage = load("views/HomePage");
+const MoviesPage = load("views/MoviesPage");
+const MovieBigViewPage = load("components/MovieBigViewPage");
+const SearchMovies = load("components/SearchMovies");
+const PageNotFound = load("views/PageNotFound");
+
 function App() {
   return (
     <>

@@ -1,12 +1,18 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { slugTransform } from "../../helperFoo/slugify";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import defaultImage from "../../images/movie-poster.jpg";
-import s from "./MovieSimpleCard.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import {
+  CardLink,
+  PosterThumb,
+  InfoThumb,
+  Title,
+  Info,
+} from "./MovieSimpleCard.styled";
 
 export default function MovieSimpleCard({ movie }) {
   const { title, id, poster_path, release_date, vote_average } = movie;
@@ -15,36 +21,37 @@ export default function MovieSimpleCard({ movie }) {
   const titlePath = slugTransform(title);
 
   return (
-    <Link
+    <CardLink
       to={`/movies/${titlePath}-${id}`}
       state={{
         from: location,
       }}
-      className={s.linkCard}
     >
-      <div className={s.posterThumb}>
+      <PosterThumb>
         {poster_path && (
           <LazyLoadImage
             effect="blur"
             alt={"Poster of:" + title}
             src={`https://www.themoviedb.org/t/p/w440_and_h660_face/${poster_path}`}
             placeholderSrc={defaultImage}
-            className={s.poster}
           />
         )}
-      </div>
-      <div className={s.infoThumb}>
-        <p className={s.title}>{title}</p>
-        <p className={s.info}>
+      </PosterThumb>
+
+      <InfoThumb>
+        <Title>{title}</Title>
+
+        <Info>
           <FaRegCalendarAlt aria-label="Release date" />
           {release_date}
-        </p>
-        <p className={s.info}>
+        </Info>
+
+        <Info>
           <AiOutlineStar aria-label="User rating of the movie" />
           {vote_average}
-        </p>
-      </div>
-    </Link>
+        </Info>
+      </InfoThumb>
+    </CardLink>
   );
 }
 
