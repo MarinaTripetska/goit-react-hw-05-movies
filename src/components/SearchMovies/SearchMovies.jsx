@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useQueryClient, useQuery } from "react-query";
+import { useQuery } from "react-query";
+
 import { fetchSearchMovies } from "API/get";
+
 import SearchForm from "../SearchForm";
 import MovieList from "../MovieList";
 import Pagination from "../Pagination";
@@ -9,17 +11,15 @@ import MainLoader from "../Loaders/MainLoader";
 import { Title, Section, MainContainer } from "../UtilsStyledComponents";
 
 export default function SearchMovies() {
-  const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
-
   const query = searchParams.get("query");
   const page = Number(searchParams.get("page"));
 
   const { data, isLoading, isFetching, isError, error, isSuccess } = useQuery(
     ["searchedMovies", query, page],
-    () => {
-      return fetchSearchMovies(query, page);
-    },
+
+    () => fetchSearchMovies(query, page),
+
     {
       enabled: !!query && !!page,
       staleTime: 60_000 * 10,
@@ -28,21 +28,6 @@ export default function SearchMovies() {
   );
 
   const isLastPage = page === data?.total_pages;
-
-  useEffect(() => {
-    if (!query || isLastPage) return;
-
-    queryClient.prefetchQuery(
-      ["searchedMovies", query, page + 1],
-      () => {
-        return fetchSearchMovies(query, page + 1);
-      },
-      {
-        keepPreviousData: true,
-        staleTime: 60_000 * 10,
-      }
-    );
-  }, [query, page, isLastPage, queryClient]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

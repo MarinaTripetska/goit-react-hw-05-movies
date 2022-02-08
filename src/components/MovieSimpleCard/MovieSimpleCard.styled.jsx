@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
+import defaultImage from "../../images/movie-poster.jpg";
 
 export const CardLink = styled(Link)`
   text-decoration: none;
@@ -32,7 +33,7 @@ export const PosterThumb = styled.div`
   height: 370px;
 
   background-color: rgb(212, 212, 212);
-  background-image: url("../../images/movie-poster.jpg");
+  background-image: url(${defaultImage});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

@@ -59,7 +59,7 @@ MovieSimpleCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    poster_path: PropTypes.string.isRequired,
+    poster_path: PropTypes.string,
     release_date: PropTypes.string,
     vote_average: PropTypes.number,
   }).isRequired,
